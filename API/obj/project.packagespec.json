@@ -15,7 +15,11 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "projectReferences": {}
+        "projectReferences": {
+          "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\DLL\\DLL.csproj": {
+            "projectPath": "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\DLL\\DLL.csproj"
+          }
+        }
       }
     },
     "warningProperties": {
@@ -26,6 +30,16 @@
   },
   "frameworks": {
     "netcoreapp3.1": {
+      "dependencies": {
+        "Microsoft.AspNetCore.Mvc.Versioning": {
+          "target": "Package",
+          "version": "[4.1.1, )"
+        },
+        "Swashbuckle.AspNetCore": {
+          "target": "Package",
+          "version": "[5.2.1, )"
+        }
+      },
       "imports": [
         "net461",
         "net462",
