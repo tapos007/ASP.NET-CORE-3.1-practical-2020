@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL;
+using DLL;
 using DLL.DbContext;
 using DLL.Repository;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,7 +33,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();;
             
             services.AddSwaggerGen(c =>
             {
@@ -47,9 +50,17 @@ namespace API
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("mydbconnection")));
-            
-            services.AddTransient<IStudentRepository,StudentRepository>();
 
+
+            GetAllDependency(services);
+            
+
+        }
+
+        private void GetAllDependency(IServiceCollection services)
+        {
+            DLLDependency.ALLDependency(services);
+            BLLDependency.ALLDependency(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

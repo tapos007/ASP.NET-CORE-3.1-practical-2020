@@ -16,6 +16,9 @@
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
+          "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\BLL\\BLL.csproj": {
+            "projectPath": "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\BLL\\BLL.csproj"
+          },
           "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\DLL\\DLL.csproj": {
             "projectPath": "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\DLL\\DLL.csproj"
           }

@@ -7,12 +7,12 @@ namespace DLL.Repository
 {
     public interface IStudentRepository
     {
-        Student AddStudent(Student astudent);
+        Student AddStudent(Student aStudent);
         List<Student> GetAllStudent();
         Student GetAStudent(string email);
-        
+   
     }
-
+  
     public class StudentRepository : IStudentRepository
     {
         private readonly ApplicationDbContext _context;
