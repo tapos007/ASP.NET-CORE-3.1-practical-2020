@@ -49,6 +49,9 @@ namespace DLL.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RollNo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("StudentId");
 
                     b.ToTable("Students");

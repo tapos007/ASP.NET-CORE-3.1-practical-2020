@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Middleware;
 using BLL;
 using DLL;
 using DLL.DbContext;
@@ -33,7 +34,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddControllers().AddFluentValidation();;
+            services.AddControllers().AddFluentValidation().AddNewtonsoftJson();
             
             services.AddSwaggerGen(c =>
             {
@@ -70,6 +71,8 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             // this part for api documentation
             // Enable middleware to serve generated Swagger as a JSON endpoint.

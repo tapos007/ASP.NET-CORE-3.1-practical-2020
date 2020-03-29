@@ -18,6 +18,9 @@
         "projectReferences": {
           "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\DLL\\DLL.csproj": {
             "projectPath": "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\DLL\\DLL.csproj"
+          },
+          "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\Utility\\Utility.csproj": {
+            "projectPath": "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\Utility\\Utility.csproj"
           }
         }
       }

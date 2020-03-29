@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using BLL.Request;
+using BLL.Services;
 using DLL.Model;
 using DLL.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -10,46 +13,46 @@ namespace API.Controllers
    
     public class StudentController : OurApplicationController
     {
-        private readonly IStudentRepository _studentRepository;
+        private readonly IStudentService _studentService;
 
-        public StudentController(IStudentRepository studentRepository)
+        public StudentController(IStudentService studentService)
         {
-            _studentRepository = studentRepository;
+            _studentService = studentService;
         }
 
         [HttpGet]
-        public ActionResult GetAll()
+        public async Task<ActionResult> GetAll()
         {
-            return Ok(_studentRepository.GetAllStudent());
+            return Ok(await _studentService.GetAllStudentAsync());
         }
-        
+
         [HttpGet]
-        [Route("{email}")]
-        public ActionResult GetASingleStudent(string email)
+        [Route("{rollNo}")]
+        public async Task<ActionResult> GetASingleStudent(string rollNo)
         {
-            return Ok(_studentRepository.GetAStudent(email));
+            return Ok(await _studentService.GetAStudentAsync(rollNo));
         }
-        
+
         [HttpPost]
-        public ActionResult Insert([FromForm] Student aStudent)
+        public async Task<ActionResult> Insert(StudentInsertRequest aStudent)
         {
-            return Ok(_studentRepository.AddStudent(aStudent));
+            return Ok(await _studentService.AddStudentAsync(aStudent));
+        } 
+
+        [HttpPut("{rollNo}")]
+        public async Task<ActionResult> Update(string rollNo, StudentUpdateRequest aStudent)
+        {
+            return Ok(await _studentService.UpdateStudentAsync(rollNo, aStudent));
         }
-        
-        // [HttpPut("{email}")]
-        // public ActionResult Update(string email,[FromForm] Student aStudent)
-        // {
-        //     return Ok(AllStudentInfo.UpdateStudent(email,aStudent));
-        // }
-        //
-        // [HttpDelete("{email}")]
-        // public ActionResult Delete(string email)
-        // {
-        //     return Ok(AllStudentInfo.DeleteStudent(email));
-        // }
+
+        [HttpDelete("{rollNo}")]
+        public async Task<ActionResult> Delete(string rollNo)
+        {
+            return Ok(await _studentService.DeleteStudentAsync(rollNo));
+        }
     }
 
-    
-    
-    
+
+
+
 }
