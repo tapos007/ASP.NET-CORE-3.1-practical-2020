@@ -38,5 +38,18 @@ namespace API.Controllers
             
             return Ok( await  _departmentService.AddDepartmentAsync(aDepartment));
         }
+        
+        [HttpDelete("{code}")]
+        public async Task<ActionResult> Delete(string code)
+        {
+            return Ok(await _departmentService.DeleteDepartmentAsync(code));
+        }
+        
+        
+        [HttpPut("{code}")]
+        public async Task<ActionResult> Update(string code, DepertmentUpdateRequest aDepartment)
+        {
+            return Ok(await _departmentService.UpdateDepartmentAsync(code, aDepartment));
+        }
     }
 }

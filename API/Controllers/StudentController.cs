@@ -6,6 +6,7 @@ using BLL.Services;
 using DLL.Model;
 using DLL.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Utility.Helpers;
 
 namespace API.Controllers
 {
@@ -20,12 +21,33 @@ namespace API.Controllers
             _studentService = studentService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
-        {
-            return Ok(await _studentService.GetAllStudentAsync());
-        }
+        // [HttpGet]
+        // public async Task<ActionResult> GetAll()
+        // {
+        //     return Ok(await _studentService.GetAllStudentAsync());
+        // }
 
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            // // MyClass aClass = new MyClass();
+            // // aClass.AddInfo("tapos");
+            // // aClass.AddInfo("sumon");
+            //
+            // MyClassInteger aClass = new MyClassInteger();
+            // aClass.AddInfo(30);
+            // aClass.AddInfo(70);
+            
+            // MyFinalClass<string> aClass = new MyFinalClass<string>();
+            // aClass.AddInfo("tapos");
+            //  aClass.AddInfo("sumon");
+             
+             
+             MyFinalClass<double> aClass = new MyFinalClass<double>();
+             aClass.AddInfo(30);
+             aClass.AddInfo(50);
+            return Ok(aClass.GetAllData());
+        }
         [HttpGet]
         [Route("{rollNo}")]
         public async Task<ActionResult> GetASingleStudent(string rollNo)

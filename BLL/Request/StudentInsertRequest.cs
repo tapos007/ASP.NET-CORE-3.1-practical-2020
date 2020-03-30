@@ -15,12 +15,6 @@ namespace BLL.Request
         public string Email { get; set; }
         public string RollNo { get; set; }
     }
-    public class StudentUpdateRequest
-    {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string RollNo { get; set; }
-    }
 
     public class StudentInsertRequestValidator : AbstractValidator<StudentInsertRequest>
     {
