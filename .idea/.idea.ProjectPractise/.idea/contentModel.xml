@@ -13,6 +13,7 @@
           <e p="DepartmentController.cs" t="Include" />
           <e p="OurApplicationController.cs" t="Include" />
           <e p="StudentController.cs" t="Include" />
+          <e p="TestController.cs" t="Include" />
         </e>
         <e p="Middleware" t="Include">
           <e p="ExceptionMiddleware.cs" t="Include" />
@@ -51,6 +52,7 @@
         <e p="Services" t="Include">
           <e p="IDepartmentService.cs" t="Include" />
           <e p="IStudentService.cs" t="Include" />
+          <e p="ITestService.cs" t="Include" />
         </e>
       </e>
       <e p="DLL" t="IncludeRecursive">
@@ -84,6 +86,7 @@
         </e>
         <e p="UnitOfWork" t="Include">
           <e p="IRepositoryBase.cs" t="Include" />
+          <e p="IUnitOfWork.cs" t="Include" />
         </e>
       </e>
       <e p="packages" t="ExcludeRecursive" />

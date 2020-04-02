@@ -23,35 +23,29 @@ namespace BLL.Request
         public StudentInsertRequestValidator(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            RuleFor((x => x.Name)).NotNull().NotEmpty()
-                .MinimumLength(3);
-            RuleFor((x => x.Email)).NotNull().NotEmpty().EmailAddress()
-                .MustAsync(EmailExists).WithMessage("Email already exists");
-            RuleFor((x => x.RollNo)).NotNull().NotEmpty()
-               .MinimumLength(3).MustAsync(RollNoExists).WithMessage("RollNo already exists");
+            RuleFor(x=>x.RollNo).NotEmpty().NotNull().MustAsync(RollExits).WithMessage("Roll Aleady exits.");
+            RuleFor(x => x.Name).NotEmpty().NotNull().MustAsync(NameExits).WithMessage("Name Aleady exits.");
         }
 
-        private async Task<bool> EmailExists(string email, CancellationToken cancellationToken)
+        private async Task<bool> NameExits(string name, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrWhiteSpace(email))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                return true;
+                return false;
             }
-
             var studentService = _serviceProvider.GetRequiredService<IStudentService>();
+            return await studentService.IsNameExit(name);
 
-            return !await studentService.IsEmailExists(email);
         }
 
-        private async Task<bool> RollNoExists(string rollNo, CancellationToken cancellationToken)
+        private async Task<bool> RollExits(string roll, CancellationToken cancellationToken)
         {
-            if (string.IsNullOrWhiteSpace(rollNo))
+            if (string.IsNullOrWhiteSpace(roll))
             {
-                return true;
+                return false;
             }
             var studentService = _serviceProvider.GetRequiredService<IStudentService>();
-
-            return !await studentService.IsRollNoExits (rollNo);
+            return await studentService.IsRollExit(roll);
         }
 
 
@@ -77,7 +71,7 @@ namespace BLL.Request
             }
             var studentService = _serviceProvider.GetRequiredService<IStudentService>();
 
-            return await studentService.IsRollNoExits(rollNo);
+            return await studentService.IsRollExit(rollNo);
         }
 
     }

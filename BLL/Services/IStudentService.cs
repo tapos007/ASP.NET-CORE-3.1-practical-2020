@@ -5,82 +5,131 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using DLL.UnitOfWork;
 using Utility.Exceptions;
 
 namespace BLL.Services
 {
-    public interface IStudentService
+    
+public interface IStudentService
     {
         Task<Student> AddStudentAsync(StudentInsertRequest request);
-        Task<Student> UpdateStudentAsync(string rollNo, StudentUpdateRequest request);
-        Task<Student> DeleteStudentAsync(string rollNo);
-        Task<List<Student>> GetAllStudentAsync();
-        Task<Student> GetAStudentAsync(string rollNo);
-        Task<bool> IsEmailExists(string email);
-        Task<bool> IsRollNoExits(string rollNo);
+        Task<List<Student>> GetAllAsync();
+        Task<Student> GeatAStudentAsync(string roll);
+        Task<Student> UpdateAsync(string roll, StudentUpdateRequest request);
+        Task<bool> DeleteAsync(string roll);
+
+        Task<bool> IsNameExit(string name);
+        Task<bool> IsRollExit(string roll);
     }
 
     public class StudentService : IStudentService
     {
-        private readonly IStudentRepository _studentRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public StudentService(IStudentRepository studentRepository)
+        public StudentService(IUnitOfWork unitOfWork)
         {
-            _studentRepository = studentRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Student> AddStudentAsync(StudentInsertRequest request)
         {
             Student student = new Student()
-            {               
-                Name = request.Name,
-                Email = request.Email,
-                RollNo = request.RollNo
-            };
-            return await _studentRepository.AddStudentAsync(student);
-        }
-        public async Task<Student> UpdateStudentAsync(string rollNo, StudentUpdateRequest request)
-        {
-            Student student = new Student()
             {
                 Name = request.Name,
-                Email = request.Email,
-                RollNo = request.RollNo
-            };
-            return await _studentRepository.UpdateStudentAsync(student);
-        }
-        public async Task<Student> DeleteStudentAsync(string rollNo)
-        {
-            return await _studentRepository.DeleteStudentAsync(rollNo);
-        }
-
-        public async Task<List<Student>> GetAllStudentAsync()
-        {
-            return await _studentRepository.GetAllStudentAsync();
+                RollNo = request.RollNo,
+                Email = request.Email
+            }; 
+           await _unitOfWork.StudentRepository.CreateAsync(student);
+           if (await _unitOfWork.ApplicationSaveChangesAsync())
+           {
+               return student;
+           }
+           throw new MyAppException("Student Data Not save");
         }
 
-        public async Task<Student> GetAStudentAsync(string rollNo)
+        public async Task<bool> DeleteAsync(string roll)
         {
-            
-            var student = await  _studentRepository.GetAStudentAsync(rollNo);
-
+            var student = await _unitOfWork.StudentRepository.GetAAsynce(x => x.RollNo == roll);
             if (student == null)
             {
-                throw new MyAppException("no data found");
+                throw new MyAppException("Roll wise Student not found");
             }
 
+            _unitOfWork.StudentRepository.DeleteAsync(student);
+           if (await _unitOfWork.ApplicationSaveChangesAsync())
+           {
+               return true;
+           }
+
+           return false;
+
+        }
+
+        public async Task<Student> GeatAStudentAsync(string roll)
+        {
+            var student = await _unitOfWork.StudentRepository.GetAAsynce(x => x.RollNo == roll);
+            if(student == null)
+            {
+                throw new MyAppException("Data Not found !!");
+            }
             return student;
         }
 
-        public async Task<bool> IsEmailExists(string email)
+        public async Task<List<Student>> GetAllAsync()
         {
-            return await _studentRepository.IsEmailExists(email);
+            var allStudent = await _unitOfWork.StudentRepository.GetListAsynce();
+
+             if (allStudent == null)
+             {
+                 throw new MyAppException("No found Data");
+             }
+
+             return allStudent;
         }
 
-        public async Task<bool> IsRollNoExits(string rollNo)
+        public async Task<bool> IsNameExit(string name)
         {
-            return await _studentRepository.IsRollNoExists(rollNo);
+            var student = await _unitOfWork.StudentRepository.GetAAsynce(x => x.Name == name);
+            if (student != null)
+            {
+                return false;
+            }
+            return true;
         }
 
+        public async Task<bool> IsRollExit(string roll)
+        {
+            var student = await _unitOfWork.StudentRepository.GetAAsynce(x => x.RollNo == roll);
+            if (student != null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public async Task<Student> UpdateAsync(string roll, StudentUpdateRequest request)
+        {
+
+            var student = await _unitOfWork.StudentRepository.GetAAsynce(x => x.RollNo == roll);
+
+            if (student == null)
+            {
+                throw new MyAppException("No found Data");
+            } 
+
+            student.Name = request.Name;
+            student.RollNo = request.RollNo;
+            student.Email = request.Email;
+            _unitOfWork.StudentRepository.UpdateAsyc(student);
+           
+
+            if (await _unitOfWork.ApplicationSaveChangesAsync())
+            {
+                return student;
+            }
+            throw new MyAppException("Student Data Not save");
+        }
     }
 }

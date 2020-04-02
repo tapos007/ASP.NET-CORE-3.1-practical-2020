@@ -21,56 +21,35 @@ namespace API.Controllers
             _studentService = studentService;
         }
 
-        // [HttpGet]
-        // public async Task<ActionResult> GetAll()
-        // {
-        //     return Ok(await _studentService.GetAllStudentAsync());
-        // }
 
         [HttpGet]
-        public ActionResult GetAll()
+        public async Task<ActionResult> GetAllStudnet()
         {
-            // // MyClass aClass = new MyClass();
-            // // aClass.AddInfo("tapos");
-            // // aClass.AddInfo("sumon");
-            //
-            // MyClassInteger aClass = new MyClassInteger();
-            // aClass.AddInfo(30);
-            // aClass.AddInfo(70);
-            
-            // MyFinalClass<string> aClass = new MyFinalClass<string>();
-            // aClass.AddInfo("tapos");
-            //  aClass.AddInfo("sumon");
-             
-             
-             MyFinalClass<double> aClass = new MyFinalClass<double>();
-             aClass.AddInfo(30);
-             aClass.AddInfo(50);
-            return Ok(aClass.GetAllData());
+            return Ok(await _studentService.GetAllAsync());
         }
-        [HttpGet]
-        [Route("{rollNo}")]
-        public async Task<ActionResult> GetASingleStudent(string rollNo)
+
+        [HttpGet("{roll}")]
+        public async Task<ActionResult> GetAStudent(string roll)
         {
-            return Ok(await _studentService.GetAStudentAsync(rollNo));
+            return Ok( await _studentService.GeatAStudentAsync(roll));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Insert(StudentInsertRequest aStudent)
+        public async Task<ActionResult> AddStudent([FromForm] StudentInsertRequest request)
         {
-            return Ok(await _studentService.AddStudentAsync(aStudent));
-        } 
-
-        [HttpPut("{rollNo}")]
-        public async Task<ActionResult> Update(string rollNo, StudentUpdateRequest aStudent)
-        {
-            return Ok(await _studentService.UpdateStudentAsync(rollNo, aStudent));
+            return Ok(await _studentService.AddStudentAsync(request));
         }
 
-        [HttpDelete("{rollNo}")]
-        public async Task<ActionResult> Delete(string rollNo)
+        [HttpPut("{roll}")]
+        public async Task<ActionResult> Update(string roll,[FromForm]  StudentUpdateRequest request)
         {
-            return Ok(await _studentService.DeleteStudentAsync(rollNo));
+            return Ok(await _studentService.UpdateAsync(roll, request));
+        }
+
+        [HttpDelete("{roll}")]
+        public async Task<ActionResult> Delete([FromForm] string roll)
+        {
+            return Ok( await _studentService.DeleteAsync(roll));
         }
     }
 

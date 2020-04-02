@@ -16,7 +16,7 @@ namespace DLL.UnitOfWork
         Task<T> GetAAsynce(Expression<Func<T, bool>> expression = null);
         Task<List<T>> GetListAsynce(Expression<Func<T, bool>> expression = null);
 
-        Task<bool> ApplicationSaveChangesAsync();
+      
     }
 
     public class RepositoryBase<T> : IRepositoryBase<T> where T : class
@@ -59,16 +59,6 @@ namespace DLL.UnitOfWork
           
         }
 
-        public async Task<bool> ApplicationSaveChangesAsync()
-        {
-           // return await _context.SaveChangesAsync()>0
-
-           if (await _context.SaveChangesAsync() > 0)
-           {
-               return true;
-           }
-
-           return false;
-        }
+       
     }
 }
