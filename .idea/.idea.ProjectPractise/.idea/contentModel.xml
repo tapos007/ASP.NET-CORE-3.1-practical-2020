@@ -63,14 +63,16 @@
         <e p="DLL.csproj" t="IncludeRecursive" />
         <e p="DLLDependency.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="20200327173559_InitialMigration.cs" t="Include" />
-          <e p="20200327173559_InitialMigration.Designer.cs" t="Include" />
-          <e p="20200329164734_UpdateStudentMigration.cs" t="Include" />
-          <e p="20200329164734_UpdateStudentMigration.Designer.cs" t="Include" />
+          <e p="20200403165143_InitialMigration.cs" t="Include" />
+          <e p="20200403165143_InitialMigration.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
           <e p="Department.cs" t="Include" />
+          <e p="Interfaces" t="Include">
+            <e p="ISoftDelete.cs" t="Include" />
+            <e p="ITrackable.cs" t="Include" />
+          </e>
           <e p="Student.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
