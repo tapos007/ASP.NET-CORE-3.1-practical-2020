@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "vqesb1oPdOeQdbvDecXoAwKAoCM/R2EwTmApLK5rfchlqEcKTMNMWSWp6wvZhNqknmDluxR/f4Emo2A1ulvg7g==",
+  "dgSpecHash": "Nv6fOF2zk83aMp9mY8UYDdISOBuEuvoS1OX7MWNb6XnGggMKU3+tmb+DgaVZfLk5N5XtxIbuGp7MB9M2wi0w/A==",
   "success": true,
   "projectFilePath": "C:\\Users\\tapos\\RiderProjects\\ProjectPractise\\DLL\\DLL.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\tapos\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.3\\microsoft.aspnetcore.cryptography.internal.3.1.3.nupkg.sha512",
+    "C:\\Users\\tapos\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.3\\microsoft.aspnetcore.cryptography.keyderivation.3.1.3.nupkg.sha512",
+    "C:\\Users\\tapos\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.3\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.3.nupkg.sha512",
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -22,6 +25,8 @@
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.3\\microsoft.extensions.configuration.binder.3.1.3.nupkg.sha512",
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.3\\microsoft.extensions.dependencyinjection.3.1.3.nupkg.sha512",
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.3\\microsoft.extensions.dependencyinjection.abstractions.3.1.3.nupkg.sha512",
+    "C:\\Users\\tapos\\.nuget\\packages\\microsoft.extensions.identity.core\\3.1.3\\microsoft.extensions.identity.core.3.1.3.nupkg.sha512",
+    "C:\\Users\\tapos\\.nuget\\packages\\microsoft.extensions.identity.stores\\3.1.3\\microsoft.extensions.identity.stores.3.1.3.nupkg.sha512",
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.extensions.logging\\3.1.3\\microsoft.extensions.logging.3.1.3.nupkg.sha512",
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.3\\microsoft.extensions.logging.abstractions.3.1.3.nupkg.sha512",
     "C:\\Users\\tapos\\.nuget\\packages\\microsoft.extensions.options\\3.1.3\\microsoft.extensions.options.3.1.3.nupkg.sha512",

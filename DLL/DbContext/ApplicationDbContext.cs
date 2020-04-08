@@ -5,11 +5,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using DLL.Model;
 using DLL.Model.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DLL.DbContext
 {
-    public class ApplicationDbContext : Microsoft.EntityFrameworkCore.DbContext
+    public class ApplicationDbContext : IdentityDbContext<AppUser,AppRole,int,IdentityUserClaim<int>,AppUserRole,IdentityUserLogin<int>,IdentityRoleClaim<int>,IdentityUserToken<int>>
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {

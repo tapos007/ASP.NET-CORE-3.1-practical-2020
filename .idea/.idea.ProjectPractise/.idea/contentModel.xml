@@ -63,11 +63,16 @@
         <e p="DLL.csproj" t="IncludeRecursive" />
         <e p="DLLDependency.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="20200403165143_InitialMigration.cs" t="Include" />
-          <e p="20200403165143_InitialMigration.Designer.cs" t="Include" />
+          <e p="20200408173313_IdentityUpdateMigration2.cs" t="Include" />
+          <e p="20200408173313_IdentityUpdateMigration2.Designer.cs" t="Include" />
+          <e p="20200408173505_IdentityUpdateMigration3.cs" t="Include" />
+          <e p="20200408173505_IdentityUpdateMigration3.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
+          <e p="AppRole.cs" t="Include" />
+          <e p="AppUser.cs" t="Include" />
+          <e p="AppUserRole.cs" t="Include" />
           <e p="Department.cs" t="Include" />
           <e p="Interfaces" t="Include">
             <e p="ISoftDelete.cs" t="Include" />
