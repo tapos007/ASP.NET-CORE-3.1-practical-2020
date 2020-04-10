@@ -13,6 +13,7 @@ namespace BLL
             services.AddTransient<IDepartmentService,DepartmentService>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<ITestService, TestService>();
+            services.AddTransient<IAccountService, AccountService>();
 
             AllValidationDependency(services);
             

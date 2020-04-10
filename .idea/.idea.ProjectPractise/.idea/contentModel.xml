@@ -10,6 +10,7 @@
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controllers" t="Include">
+          <e p="AccountController.cs" t="Include" />
           <e p="DepartmentController.cs" t="Include" />
           <e p="OurApplicationController.cs" t="Include" />
           <e p="StudentController.cs" t="Include" />
@@ -45,11 +46,13 @@
         <e p="Request" t="Include">
           <e p="DepartInsertRequest.cs" t="Include" />
           <e p="DepertmentUpdateRequest.cs" t="Include" />
+          <e p="LoginRequest.cs" t="Include" />
           <e p="StudentInsertRequest.cs" t="Include" />
           <e p="StudentUpdateRequest.cs" t="Include" />
         </e>
         <e p="Response" t="Include" />
         <e p="Services" t="Include">
+          <e p="IAccountService.cs" t="Include" />
           <e p="IDepartmentService.cs" t="Include" />
           <e p="IStudentService.cs" t="Include" />
           <e p="ITestService.cs" t="Include" />

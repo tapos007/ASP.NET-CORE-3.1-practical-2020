@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using API.Middleware;
 using BLL;
@@ -9,6 +10,7 @@ using DLL.DbContext;
 using DLL.Model;
 using DLL.Repository;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -19,6 +21,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace API
@@ -54,7 +57,7 @@ namespace API
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("mydbconnection")));
             
-            services.AddIdentity<AppUser, AppRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             
             
@@ -78,11 +81,43 @@ namespace API
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = false;
             });
+            
+            // JWT Setup
+
+            JWTConfiguration(services);
+            // JWT Setup End
+            
+            
 
 
             GetAllDependency(services);
             
 
+        }
+
+        private void JWTConfiguration(IServiceCollection services)
+        {
+            services.AddAuthentication(x =>
+                {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;  
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;  
+                })  
+                .AddJwtBearer(options =>  
+                {  
+                    options.TokenValidationParameters = new TokenValidationParameters  
+                    {  
+                        ValidateIssuer = true,  
+                        ValidateAudience = true,  
+                        ValidateLifetime = true,  
+                        ValidateIssuerSigningKey = true,  
+                        ValidIssuer = Configuration["Jwt:Issuer"],  
+                        ValidAudience = Configuration["Jwt:Issuer"],  
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))  
+                    };  
+                });
+            
+            
+           
         }
 
         private void GetAllDependency(IServiceCollection services)
@@ -115,8 +150,10 @@ namespace API
             // this part end api documentation
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            
             app.UseAuthentication();
+            app.UseRouting();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
