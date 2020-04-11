@@ -30,16 +30,30 @@ namespace API.Controllers
         [HttpGet("test1")]
         public ActionResult Test1()
         {
+            
             return Ok("enter test 1");
         }
         
         
         
         [HttpGet("test2")]
-        [Authorize]
-        public ActionResult Test2()
+        [Authorize(Roles = "customer")]
+        public async Task<ActionResult> Test2()
         {
+            var tt = User;
+
+           await _accountService.Test(tt); 
             return Ok("enter test 2");
+        }
+        
+        [HttpGet("test3")]
+        [Authorize(Roles = "agent")]
+        public ActionResult Test3()
+        {
+            var tt = User;
+
+            _accountService.Test(tt); 
+            return Ok("enter test 3");
         }
         
         

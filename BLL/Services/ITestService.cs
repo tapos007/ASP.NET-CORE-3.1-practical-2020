@@ -31,25 +31,25 @@ namespace BLL.Services
             
             var user = new AppUser() {
                
-                UserName = "tapos.aa@gmail.com", 
-                Email = "tapos.aa@gmail.com"
+                UserName = "sumon@gmail.com", 
+                Email = "sumon@gmail.com"
             };
             var result = await _userManager.CreateAsync(user, "tapos1234$..T");
 
             if (result.Succeeded)
             {
-                var role = await _roleManager.FindByNameAsync("customer");
+                var role = await _roleManager.FindByNameAsync("agent");
 
                 if (role == null)
                 {
                     await _roleManager.CreateAsync(new AppRole()
                     {
-                        Name = "customer"
+                        Name = "agent"
                     });
                 }
             }
 
-            await   _userManager.AddToRoleAsync(user, "customer");
+            await   _userManager.AddToRoleAsync(user, "agent");
 
         }
         

@@ -12,7 +12,8 @@
           "Microsoft.EntityFrameworkCore": "3.1.3",
           "Microsoft.EntityFrameworkCore.Design": "3.1.3",
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.3",
-          "Microsoft.EntityFrameworkCore.Tools": "3.1.3"
+          "Microsoft.EntityFrameworkCore.Tools": "3.1.3",
+          "Microsoft.AspNetCore.Http.Abstractions": "3.1.0.0"
         },
         "runtime": {
           "DLL.dll": {}
@@ -911,6 +912,22 @@
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
         }
+      },
+      "Microsoft.AspNetCore.Http.Abstractions/3.1.0.0": {
+        "runtime": {
+          "Microsoft.AspNetCore.Http.Abstractions.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.100.220.6801"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Http.Features/3.1.0.0": {
+        "runtime": {
+          "Microsoft.AspNetCore.Http.Features.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.100.220.6801"
+          }
+        }
       }
     }
   },
@@ -1570,6 +1587,16 @@
       "sha512": "sha512-MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "path": "system.xml.xmlserializer/4.3.0",
       "hashPath": "system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Http.Abstractions/3.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.AspNetCore.Http.Features/3.1.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

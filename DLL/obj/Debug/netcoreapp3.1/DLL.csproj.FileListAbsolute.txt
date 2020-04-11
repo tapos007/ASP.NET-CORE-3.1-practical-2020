@@ -10,3 +10,8 @@ C:\Users\tapos\RiderProjects\ProjectPractise\DLL\obj\Debug\netcoreapp3.1\DLL.Ass
 C:\Users\tapos\RiderProjects\ProjectPractise\DLL\obj\Debug\netcoreapp3.1\DLL.dll
 C:\Users\tapos\RiderProjects\ProjectPractise\DLL\obj\Debug\netcoreapp3.1\DLL.pdb
 C:\Users\tapos\RiderProjects\ProjectPractise\DLL\obj\Debug\netcoreapp3.1\DLL.genruntimeconfig.cache
+C:\Users\tapos\RiderProjects\ProjectPractise\DLL\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\tapos\RiderProjects\ProjectPractise\DLL\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\tapos\RiderProjects\ProjectPractise\DLL\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Abstractions.xml
+C:\Users\tapos\RiderProjects\ProjectPractise\DLL\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\tapos\RiderProjects\ProjectPractise\DLL\obj\Debug\netcoreapp3.1\DLL.csproj.CopyComplete

@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using DLL.Model;
 using DLL.Model.Interfaces;
+using DLL.ViewModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +16,11 @@ namespace DLL.DbContext
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser,AppRole,int,IdentityUserClaim<int>,AppUserRole,IdentityUserLogin<int>,IdentityRoleClaim<int>,IdentityUserToken<int>>
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public ApplicationDbContext(DbContextOptions options,IHttpContextAccessor httpContextAccessor) : base(options)
         {
+            _httpContextAccessor = httpContextAccessor;
         }
 
         private static readonly MethodInfo _propertyMethod = typeof(EF)
@@ -47,7 +53,7 @@ namespace DLL.DbContext
         private void BeforeSaveChanges()
         {
             var entries = ChangeTracker.Entries();
-
+            var userEmail = GetCurrentUserEmail();
             foreach (var entity in entries)
             {
                 var nowTime = DateTime.Now;
@@ -58,9 +64,12 @@ namespace DLL.DbContext
                         case EntityState.Added:
                             trackable.CreatedAt = nowTime;
                             trackable.UpdatedAt = nowTime;
+                            trackable.CreatedBy = userEmail;
+                            trackable.UpdatedBy = userEmail;
                             break;
                         case EntityState.Modified:
                             trackable.UpdatedAt = nowTime;
+                            trackable.UpdatedBy = userEmail;
                             break;
                         case EntityState.Deleted:
                             entity.Property(IsDeletedProperty).CurrentValue = true;
@@ -70,6 +79,19 @@ namespace DLL.DbContext
                     }
                 }
             }
+        }
+
+        private string GetCurrentUserEmail()
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+
+            if (httpContext != null)
+            {
+                var email = httpContext.User.FindFirst(x => x.Type == CustomJwtClaimsName.UserName)?.Value;
+                return email;
+            }
+
+            return null;
         }
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,
