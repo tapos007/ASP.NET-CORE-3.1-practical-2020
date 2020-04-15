@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\tapos\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\tapos\\.nuget\\packages"
-    ]
-  }
-}
