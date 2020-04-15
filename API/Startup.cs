@@ -23,6 +23,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Utility;
 
 namespace API
 {
@@ -124,6 +125,7 @@ namespace API
         {
             DLLDependency.ALLDependency(services);
             BLLDependency.ALLDependency(services);
+            UtilityDependency.ALLDependency(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

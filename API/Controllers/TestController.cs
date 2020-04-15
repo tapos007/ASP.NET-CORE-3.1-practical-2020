@@ -1,23 +1,26 @@
 ﻿using System.Threading.Tasks;
 using BLL.Services;
 using Microsoft.AspNetCore.Mvc;
+using Utility.Helpers;
 
 namespace API.Controllers
 {
     public class TestController :  OurApplicationController
     {
         private readonly ITestService _testService;
+        private readonly TaposRSA _taposRsa;
 
-        public TestController(ITestService testService)
+        public TestController(ITestService testService,TaposRSA taposRsa)
         {
             _testService = testService;
+            _taposRsa = taposRsa;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-
-          await  _testService.SaveAllData();
+            _taposRsa.GenerateRsaKey("v1");
+         // await  _testService.SaveAllData();
             return Ok("hello");
         }
     }

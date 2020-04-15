@@ -10,6 +10,11 @@ namespace BLL
         public static void ALLDependency(IServiceCollection services)
         {
 
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = "localhost";
+                options.InstanceName = "PractiseDb";
+            });
             services.AddTransient<IDepartmentService,DepartmentService>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<ITestService, TestService>();

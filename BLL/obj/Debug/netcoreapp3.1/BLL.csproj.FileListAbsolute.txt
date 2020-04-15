@@ -2,7 +2,9 @@ C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\BLL.dep
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\BLL.dll
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\BLL.pdb
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\DLL.dll
+C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\Utility.dll
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\DLL.pdb
+C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\Utility.pdb
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\obj\Debug\netcoreapp3.1\BLL.csprojAssemblyReference.cache
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CoreCompileInputs.cache
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\obj\Debug\netcoreapp3.1\BLL.AssemblyInfoInputs.cache
@@ -10,5 +12,3 @@ C:\Users\tapos\RiderProjects\ProjectPractise\BLL\obj\Debug\netcoreapp3.1\BLL.Ass
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CopyComplete
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\obj\Debug\netcoreapp3.1\BLL.dll
 C:\Users\tapos\RiderProjects\ProjectPractise\BLL\obj\Debug\netcoreapp3.1\BLL.pdb
-C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\Utility.dll
-C:\Users\tapos\RiderProjects\ProjectPractise\BLL\bin\Debug\netcoreapp3.1\Utility.pdb
