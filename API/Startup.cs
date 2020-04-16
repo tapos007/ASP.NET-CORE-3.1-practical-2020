@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.Middleware;
+using API.Policy;
 using BLL;
 using DLL;
 using DLL.DbContext;
@@ -11,6 +12,7 @@ using DLL.Model;
 using DLL.Repository;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -116,13 +118,21 @@ namespace API
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))  
                     };  
                 });
-            
-            
-           
+
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AtToken", Policy => Policy.Requirements.Add(new TokenPolicy()));
+            });
+
+
+
         }
 
         private void GetAllDependency(IServiceCollection services)
         {
+
+            services.AddSingleton<IAuthorizationHandler,TokenPolicyHandler>();
             DLLDependency.ALLDependency(services);
             BLLDependency.ALLDependency(services);
             UtilityDependency.ALLDependency(services);
@@ -154,9 +164,10 @@ namespace API
 
             
             app.UseAuthentication();
+           
             app.UseRouting();
-            
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

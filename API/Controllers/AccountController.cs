@@ -37,23 +37,42 @@ namespace API.Controllers
         
         
         [HttpGet("test2")]
-        [Authorize(Roles = "customer")]
-        public async Task<ActionResult> Test2()
+        [Authorize(Policy = "AtToken")]
+        public  ActionResult Test2()
         {
-            var tt = User;
-
-           await _accountService.Test(tt); 
+           
             return Ok("enter test 2");
         }
         
         [HttpGet("test3")]
-        [Authorize(Roles = "agent")]
+        [Authorize(Roles = "customer,agent",Policy = "AtToken")]
         public ActionResult Test3()
         {
             var tt = User;
 
             _accountService.Test(tt); 
             return Ok("enter test 3");
+        }
+        
+        
+        [HttpPost("logout")]
+        [Authorize(Roles = "customer,agent",Policy = "AtToken")]
+        public async Task<ActionResult> Logout()
+        {
+            var tt = User;
+
+            
+            return Ok(await  _accountService.Logout(tt));
+        }
+        
+        
+        [HttpPost("refresh")]
+        public async Task<ActionResult> RefreshToken(RefeshTokenRequest  request)
+        {
+          
+
+            
+            return Ok(await  _accountService.RefreshToken(request.Token));
         }
         
         
