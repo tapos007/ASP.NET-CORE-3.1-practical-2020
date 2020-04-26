@@ -10,6 +10,7 @@ namespace BLL.Services
     public interface ITestService
     {
         Task SaveAllData();
+        Task UpdateBalance();
     }
 
     public class TestService : ITestService
@@ -52,6 +53,24 @@ namespace BLL.Services
             await   _userManager.AddToRoleAsync(user, "agent");
 
         }
-        
+
+        public async Task UpdateBalance()
+        {
+            
+            Random rnd = new Random();
+            int myNumber  = rnd.Next(1, 100);
+            Order myOrder = new Order()
+            {
+                Amount = myNumber
+            };
+
+           await _unitOfWork.OrderRepository.CreateAsync(myOrder);
+
+           if (await _unitOfWork.ApplicationSaveChangesAsync())
+           {
+               await _unitOfWork.CustomerBalanceRepository.UpdateCustomerBalanceAsync(myNumber);
+           }
+           
+        }
     }
 }

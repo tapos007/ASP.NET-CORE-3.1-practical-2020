@@ -19,8 +19,9 @@ namespace API.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            _taposRsa.GenerateRsaKey("v1");
+          //  _taposRsa.GenerateRsaKey("v1");
          // await  _testService.SaveAllData();
+         await _testService.UpdateBalance();
             return Ok("hello");
         }
     }
