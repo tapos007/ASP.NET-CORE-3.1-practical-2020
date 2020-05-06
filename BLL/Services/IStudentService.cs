@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.Response;
 using DLL.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 using Utility.Exceptions;
 
 namespace BLL.Services
@@ -15,6 +17,7 @@ public interface IStudentService
     {
         Task<Student> AddStudentAsync(StudentInsertRequest request);
         Task<List<Student>> GetAllAsync();
+        Task<List<StudentReport>> GetAllStudentDepartmentReportAsync();
         Task<Student> GeatAStudentAsync(string roll);
         Task<Student> UpdateAsync(string roll, StudentUpdateRequest request);
         Task<bool> DeleteAsync(string roll);
@@ -64,6 +67,26 @@ public interface IStudentService
 
            return false;
 
+        }
+
+        public async Task<List<StudentReport>> GetAllStudentDepartmentReportAsync()
+        {
+            var allStudent = await _unitOfWork.StudentRepository.QueryAll().Include(x=>x.Department).ToListAsync();
+// sudu student
+            var result = new List<StudentReport>();
+
+            foreach (var student in allStudent)
+            {
+                result.Add(new StudentReport()
+                {
+                    StudentName = student.Name,
+                    StudentEmail = student.Email,
+                    DepartmentCode = student.Department.Code, // department query
+                    DepartmentName = student.Department.Name // departnet query
+                });
+            }
+
+            return result;
         }
 
         public async Task<Student> GeatAStudentAsync(string roll)

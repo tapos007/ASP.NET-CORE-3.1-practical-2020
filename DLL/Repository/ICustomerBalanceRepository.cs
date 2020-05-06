@@ -54,6 +54,7 @@ namespace DLL.Repository
                             entry.CurrentValues.SetValues((databaseValue));
                         }
                     }
+                    
                 }
             } while (!saved);
         }
