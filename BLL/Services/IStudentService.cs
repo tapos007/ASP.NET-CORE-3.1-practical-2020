@@ -3,6 +3,7 @@ using DLL.Model;
 using DLL.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.Response;
@@ -24,6 +25,10 @@ public interface IStudentService
 
         Task<bool> IsNameExit(string name);
         Task<bool> IsRollExit(string roll);
+        Task<bool> IsIdExit(int id);
+        
+        Task<List<StudentReportResponse>> StudentDepartmentInfoListAsync();
+        Task<List<StudentCourseReportResponse>> StudentCourseEnrolledInfoListAsync();
     }
 
     public class StudentService : IStudentService
@@ -132,6 +137,19 @@ public interface IStudentService
 
             return true;
         }
+        
+        
+        public async Task<bool> IsIdExit(int id)
+        {
+            var student = await _unitOfWork.StudentRepository.GetAAsynce(x => x.StudentId == id);
+            if (student == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        
 
         public async Task<Student> UpdateAsync(string roll, StudentUpdateRequest request)
         {
@@ -154,6 +172,57 @@ public interface IStudentService
                 return student;
             }
             throw new MyAppException("Student Data Not save");
+        }
+        
+        
+        public async Task<List<StudentReportResponse>> StudentDepartmentInfoListAsync()
+        {
+            var students = await _unitOfWork.StudentRepository.QueryAll().Include(x => x.Department).ToListAsync();
+            
+            var result = new List<StudentReportResponse>();
+            
+            foreach (var student in students)
+            {
+                result.Add(new StudentReportResponse()
+                {
+                    Name = student.Name,
+                    Email = student.Email,
+                    RollNo = student.RollNo,
+                    DepartmentCode = student.Department.Code,
+                    DepartmentName = student.Department.Name
+                });
+            }
+
+            if(result == null)
+                throw new MyAppException("The student with department info. is not found!");
+            return result;
+        }
+
+        public async Task<List<StudentCourseReportResponse>> StudentCourseEnrolledInfoListAsync()
+        {
+            var studentCourses =
+                await _unitOfWork.StudentRepository.QueryAll()
+                    .Include(x => x.CourseStudents)
+                    .ThenInclude(x => x.Course)
+                    
+                    .ToListAsync();
+
+            var result = new List<StudentCourseReportResponse>();
+            
+            foreach (var studentCourse in studentCourses)
+            {
+                result.Add(new StudentCourseReportResponse()
+                {
+                    Name = studentCourse.Name,
+                    Email = studentCourse.Email,
+                    RollNo = studentCourse.RollNo,
+                    CourseStudents = studentCourse.CourseStudents.ToList()
+                });
+            }
+            
+            if(result == null)
+                throw new MyAppException("The student with enrolled course info. is not found!");
+            return result;
         }
     }
 }

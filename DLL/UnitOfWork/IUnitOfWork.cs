@@ -14,6 +14,8 @@ namespace DLL.UnitOfWork
         ICustomerBalanceRepository CustomerBalanceRepository { get; }
         IOrderRepository OrderRepository{ get; }
         ICourseRepository CourseRepository { get; }
+        
+        ICourseEnrollRepository CourseEnrollRepository { get; }
         // all repository need to added here end
         
         Task<bool> ApplicationSaveChangesAsync();
@@ -30,6 +32,7 @@ namespace DLL.UnitOfWork
         private ICustomerBalanceRepository _customerBalanceRepository;
         private IOrderRepository _orderRepository;
         private ICourseRepository _courseRepository;
+        private ICourseEnrollRepository _courseEnrollRepository;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -52,6 +55,10 @@ namespace DLL.UnitOfWork
         
         public ICourseRepository CourseRepository =>
             _courseRepository ??= new CourseRepository(_context);
+        
+        
+        public ICourseEnrollRepository CourseEnrollRepository =>
+            _courseEnrollRepository ??= new CourseEnrollRepository(_context);
         
         
 

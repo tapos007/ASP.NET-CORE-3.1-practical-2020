@@ -12,6 +12,7 @@ namespace BLL.Services
     {
         Task<bool> IsNameExists(string name);
         Task<bool> IsCodeExits(string name);
+        Task<bool> IsIdExits(int id);
         Task<Course> AddCourseAsync(CourseInsertRequest request);
         Task<List<Course>> GetAllCourseAsync();
         Task<Course> FindACourseAsync(string code);
@@ -49,8 +50,19 @@ namespace BLL.Services
 
             return false;
         }
-        
-        
+
+        public async Task<bool> IsIdExits(int id)
+        {
+            var department = await _unitOfWork.CourseRepository.GetAAsynce(x => x.CourseId == id);
+            if (department != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+
         public async Task<Course> AddCourseAsync(CourseInsertRequest request)
         {
             Course course = new Course()
