@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DLL.Model.Interfaces;
 
 namespace DLL.Model
@@ -13,5 +14,7 @@ namespace DLL.Model
         public string CreatedBy { get; set; }
         public DateTimeOffset UpdatedAt { get; set; }
         public string UpdatedBy { get; set; }
+        
+        public ICollection<CourseStudent> CourseStudents { get; set; }
     }
 }

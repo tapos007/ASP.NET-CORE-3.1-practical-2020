@@ -41,7 +41,8 @@ public interface IStudentService
             {
                 Name = request.Name,
                 RollNo = request.RollNo,
-                Email = request.Email
+                Email = request.Email,
+                DepartmentId = request.DepartmentId
             }; 
            await _unitOfWork.StudentRepository.CreateAsync(student);
            if (await _unitOfWork.ApplicationSaveChangesAsync())

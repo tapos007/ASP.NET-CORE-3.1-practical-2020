@@ -17,6 +17,7 @@ namespace BLL.Services
 
         Task<Boolean> IsNameExists(string name);
         Task<Boolean> IsCodeExits(string name);
+        Task<Boolean> IsIdExits(int id);
         Task<Department> DeleteDepartmentAsync(string code);
         Task<Department> UpdateDepartmentAsync(string code, DepertmentUpdateRequest aDepartment);
     }
@@ -78,6 +79,17 @@ namespace BLL.Services
         {
             var department = await _unitOfWork.DepartmentRepository.GetAAsynce(x => x.Code == code);
             if (department != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<bool> IsIdExits(int id)
+        {
+            var department = await _unitOfWork.DepartmentRepository.GetAAsynce(x => x.DepartmentId == id);
+            if (department == null)
             {
                 return true;
             }

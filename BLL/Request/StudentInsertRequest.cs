@@ -14,6 +14,7 @@ namespace BLL.Request
         public string Name { get; set; }
         public string Email { get; set; }
         public string RollNo { get; set; }
+        public int DepartmentId { get; set; }
     }
 
     public class StudentInsertRequestValidator : AbstractValidator<StudentInsertRequest>
@@ -23,8 +24,9 @@ namespace BLL.Request
         public StudentInsertRequestValidator(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            RuleFor(x=>x.RollNo).NotEmpty().NotNull().MustAsync(RollExits).WithMessage("Roll Aleady exits.");
-            RuleFor(x => x.Name).NotEmpty().NotNull().MustAsync(NameExits).WithMessage("Name Aleady exits.");
+            RuleFor(x=>x.RollNo).NotEmpty().NotNull().MustAsync(RollExits).WithMessage("Roll Already exits.");
+            RuleFor(x => x.Name).NotEmpty().NotNull().MustAsync(NameExits).WithMessage("Name Already exits.");
+            RuleFor(x => x.DepartmentId).NotNull().NotEmpty().MustAsync(DepartmentIdExists).WithMessage("Department ID not found");;
         }
 
         private async Task<bool> NameExits(string name, CancellationToken cancellationToken)
@@ -46,6 +48,18 @@ namespace BLL.Request
             }
             var studentService = _serviceProvider.GetRequiredService<IStudentService>();
             return await studentService.IsRollExit(roll);
+        }
+        
+        private async Task<bool> DepartmentIdExists(int id, CancellationToken cancellationToken)
+        {
+            if (id==0)
+            {
+                return true;
+            }
+
+            var departmentService = _serviceProvider.GetRequiredService<IDepartmentService>();
+
+            return ! await departmentService.IsIdExits(id);
         }
 
 

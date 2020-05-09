@@ -25,6 +25,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Utility;
 
 namespace API
@@ -42,7 +44,9 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddControllers().AddFluentValidation().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson(
+                opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+                .AddFluentValidation();
             
             services.AddSwaggerGen(c =>
             {
